@@ -19,11 +19,22 @@ func divideZero() {
 	fmt.Println(1 / zero)
 }
 
+func changeAfterReturn(x int) (y int) {
+	defer func() {
+		y = 1111
+	}()
+
+	y += x
+	return
+}
+
 func main() {
 	useDefer()
 	fmt.Println("")
 	foo := useDeferWithReturn()
 	fmt.Printf("%s from useDeferWithReturn", foo)
 	fmt.Println("")
-	divideZero()
+	//divideZero()
+	res := changeAfterReturn(3)
+	fmt.Println("res: ", res)
 }
